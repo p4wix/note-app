@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const testActions = require("../actions/api/test");
+const noteActions = require("../actions/api/notes");
 
 //pod główną scieżka przyjmuj tą akcje
-router.get("/", testActions.homepage);
+router.get("/", noteActions.saveNote);
 
 module.exports = router;

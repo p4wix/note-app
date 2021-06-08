@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
 const { port } = require("./config");
+const apiRouter = require("./routes/api");
+
+//db - wczytujemy po to aby plik sie uruchomił
+require("./db/mongoose");
 
 //Routes
-const apiRouter = require("./routes/api");
 app.use("/", apiRouter);
 
 //Server
