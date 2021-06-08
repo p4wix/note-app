@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-	res.send("Server works");
-});
+const testActions = require("../actions/api/test");
+
+//pod główną scieżka przyjmuj tą akcje
+router.get("/", testActions.homepage);
 
 module.exports = router;
