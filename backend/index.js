@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 //db - wczytujemy po to aby plik sie uruchomił
 require("./db/mongoose");
 
-//parsery - czyli w jaki sposób nasza aplikkacja ma przetwarzac rozne rzeczy
+//Parsery - czyli w jaki sposób nasza aplikkacja ma przetwarzac rozne rzeczy
 //Content-type: aplitation/json - w taki sposób wysyłane sa dane z fontendu
 app.use(bodyParser.json());
 
