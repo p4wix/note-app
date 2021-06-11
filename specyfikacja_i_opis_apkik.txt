@@ -20,3 +20,6 @@ npm i mongoose
 w noteActions.js aby móc sczytac wartosc req.body.xxx
 w index.js app.use(bodyParser.json()); mówi nodowi ze dane ktore wysłamy będą typu json
 npm i body-parser
+
+Frontend:: =========================================================================================================
+
