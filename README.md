@@ -12,18 +12,22 @@ folder db/models/note tam jest stworzony szablon tego jak wygląda notatka i exp
 mongoose.js - połączenie z bazą danych.
 
 Node.js module, express
-npm i express
+
+### `npm i express`
 
 mongodb, object modeling mongoose.
-npm i mongoose
+
+### `npm i mongoose`
 
 w noteActions.js aby móc sczytac wartosc req.body.xxx
 w index.js app.use(bodyParser.json()); mówi nodowi ze dane ktore wysłamy będą typu json
 npm i body-parser
 
+### `npm i body-parser`
+
 Frontend:: =========================================================================================================
 React
 
 react modal - modelowanie inputow przy edycji
-npm i react-modal
-npm install --save react-modal
+
+### `npm install --save react-modal`
