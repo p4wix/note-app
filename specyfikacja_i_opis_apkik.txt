@@ -22,4 +22,7 @@ w index.js app.use(bodyParser.json()); mówi nodowi ze dane ktore wysłamy będ�
 npm i body-parser
 
 Frontend:: =========================================================================================================
+React
 
+react modal - modelowanie inputow przy edycji
+npm i react-modal

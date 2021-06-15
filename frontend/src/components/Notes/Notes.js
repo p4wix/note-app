@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
+import NewNote from "./NewNote/NewNote";
 import Note from "./Note/Note";
+import EditNote from "./EditNote/EditNote";
 import "./Notes.css";
 
 function Notes() {
-	const notes = [
+	const [showEditModal, setShowEditModal] = useState(false);
+	const [notes, setNotes] = useState([
 		{
 			id: "12312",
 			title: "Wykpać psa",
@@ -14,15 +18,62 @@ function Notes() {
 			title: "Zrobić zakupy",
 			body: "mleko, jajka, szynka",
 		},
-	];
-	const [myNotes, setMyNotes] = useState([]);
+	]);
+	const [editNote, setEditNote] = useState({});
+
+	const deleteNote = (id) => {
+		const newNotes = [...notes].filter((note) => note.id !== id);
+		setNotes(newNotes);
+	};
+
+	const addNote = (note) => {
+		//note to ma byc obiekt
+		const newNotes = [...notes];
+		newNotes.push(note);
+		setNotes(newNotes);
+	};
+
+	const editNoteFun = (note) => {
+		const newNotes = [...notes];
+		const index = notes.findIndex((x) => x.id === note.id);
+		if (index >= 0) {
+			notes[index] = note;
+			setNotes(newNotes);
+		}
+		toggleModal();
+	};
+
+	const toggleModal = () => {
+		setShowEditModal((prevState) => !prevState);
+	};
+
+	const editNoteHandler = (note) => {
+		toggleModal();
+		setEditNote(note);
+	};
 
 	return (
 		<div>
-			<p>Moje notatki:</p>
+			<h1>Moje notatki:</h1>
+			<NewNote onAdd={addNote} />
+
+			<Modal isOpen={showEditModal} contentLabel="Edytuj notatkę">
+				<EditNote
+					onEdit={(note) => editNoteFun(note)}
+					title={editNote.title}
+					body={editNote.body}
+					id={editNote.id}
+				/>
+				<button onClick={() => toggleModal()}>Anuluj</button>
+			</Modal>
 
 			{notes.map((note) => (
-				<Note note={note} />
+				<Note
+					key={note.id}
+					note={note}
+					onDelete={deleteNote}
+					onEdit={(note) => editNoteHandler(note)}
+				/>
 			))}
 		</div>
 	);

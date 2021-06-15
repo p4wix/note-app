@@ -40,3 +40,20 @@
 .note button.delete:hover {
 	background-color: rgb(223, 57, 45);
 }
+
+h1 {
+	color: #fff;
+}
+
+input {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.375rem 0.75rem;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	margin: 10px 0;
+}
