@@ -1,50 +1,54 @@
-import React, { useState } from "react";
+import React from "react";
 
-function NewNote({ onAdd }) {
-	const [showForm, setShowForm] = useState(false);
+const { useState } = React;
+
+export default function NewNote(props) {
 	const [title, setTitle] = useState("");
 	const [desc, setDesc] = useState("");
+	const [counter, setCounter] = useState(1);
+	const [showForm, setShowForm] = useState(false);
 
-	const setRandomId = () => {
-		let randomId = String(Math.random());
-		return randomId;
+	const { onAdd } = props;
+
+	const changeTitleHandler = (e) => {
+		setTitle(e.target.value);
 	};
 
-	const createNote = () => {
-		const newNote = {
-			id: setRandomId(),
+	const changeDescHandler = (e) => {
+		setDesc(e.target.value);
+	};
+
+	//Pokazywanie formularza
+	const showFormHandler = () => {
+		setShowForm((prevState) => !prevState);
+	};
+
+	//Funkcja tworzaca notatkę ze stanu który jest w inputach
+	const addNote = (e) => {
+		e.preventDefault();
+		const noteToAdd = {
 			title: title,
 			body: desc,
+			id: counter,
 		};
+		setCounter(counter + 1);
+		onAdd(noteToAdd);
 		setTitle("");
 		setDesc("");
-		setShowForm(false);
-		return newNote;
+		showFormHandler();
 	};
 
 	return showForm ? (
-		<div className="note">
+		<form className="note">
 			<label>Tytuł:</label>
-			<input
-				type="text"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
-			/>
+			<input type="text" value={title} onChange={changeTitleHandler} />
 
 			<label>Opis:</label>
-			<input
-				type="text"
-				value={desc}
-				onChange={(e) => setDesc(e.target.value)}
-			/>
+			<input type="text" value={desc} onChange={changeDescHandler} />
 
-			<button onClick={() => onAdd(createNote())}>Dodaj notatkę</button>
-		</div>
+			<button onClick={addNote}>Dodaj notatkę</button>
+		</form>
 	) : (
-		<button onClick={() => setShowForm((prevState) => !prevState)}>
-			Nowa notatka
-		</button>
+		<button onClick={showFormHandler}>Nowa notatka</button> //ostylować kurwe
 	);
 }
-
-export default NewNote;

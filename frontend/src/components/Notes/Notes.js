@@ -1,82 +1,91 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import NewNote from "./NewNote/NewNote";
+import React from "react";
 import Note from "./Note/Note";
-import EditNote from "./EditNote/EditNote";
+import NewNote from "./NewNote/NewNote";
+import Modal from "react-modal";
 import "./Notes.css";
+import EditNote from "./EditNote/EditNote";
 
-function Notes() {
-	const [showEditModal, setShowEditModal] = useState(false);
+const { useState } = React;
+
+export default function Notes() {
 	const [notes, setNotes] = useState([
 		{
-			id: "12312",
-			title: "Wykpać psa",
-			body: "pamiętaj aby wykąpać psa specjanym szamponem",
+			title: "Wykąpać psa",
+			body: "pamiętaj aby kurwa wykąpać tego chuja",
+			id: "123",
 		},
 		{
-			id: "5523",
-			title: "Zrobić zakupy",
-			body: "mleko, jajka, szynka",
+			title: "Zakupy",
+			body: "kup piwo kurwo",
+			id: "321",
 		},
 	]);
-	const [editNote, setEditNote] = useState({});
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [currentEditedNote, setCurrentEditedNote] = useState({});
 
-	const deleteNote = (id) => {
-		const newNotes = [...notes].filter((note) => note.id !== id);
-		setNotes(newNotes);
+	//Funckja usuwająca notatkę
+	const handleDeleteButton = (id) => {
+		const currentNotes = [...notes].filter((note) => note.id !== id);
+		setNotes(currentNotes);
 	};
 
-	const addNote = (note) => {
-		//note to ma byc obiekt
-		const newNotes = [...notes];
-		newNotes.push(note);
-		setNotes(newNotes);
+	//Funkcja dodająca do tablicy nową notatkę
+	const handleAddNote = (note) => {
+		const currentNotes = [...notes];
+		currentNotes.push(note);
+		setNotes(currentNotes);
 	};
 
-	const editNoteFun = (note) => {
-		const newNotes = [...notes];
-		const index = notes.findIndex((x) => x.id === note.id);
-		if (index >= 0) {
-			notes[index] = note;
-			setNotes(newNotes);
+	//Funckja która szuka indexu poszczególnej notatki podmienia element w tablicy o danych indexie i akutualizuje tablice
+	const handleEditNote = (note) => {
+		const currentNotes = [...notes];
+		const index = currentNotes.findIndex((item) => item.id === note.id);
+		if (index > -1) {
+			currentNotes[index] = note;
+			setNotes(currentNotes);
 		}
 		toggleModal();
 	};
 
 	const toggleModal = () => {
-		setShowEditModal((prevState) => !prevState);
+		setIsModalOpen((prevState) => !prevState);
 	};
 
+	//Funkcja zamykająca modal i zapisująca nową notatkę która jest juz po edycji
 	const editNoteHandler = (note) => {
 		toggleModal();
-		setEditNote(note);
+		setCurrentEditedNote(note);
 	};
 
 	return (
 		<div>
 			<h1>Moje notatki:</h1>
-			<NewNote onAdd={addNote} />
+			<NewNote onAdd={handleAddNote} />
 
-			<Modal isOpen={showEditModal} contentLabel="Edytuj notatkę">
+			<Modal
+				isOpen={isModalOpen}
+				contentLabel="Edytuj notatke"
+				ariaHideApp={false}
+			>
 				<EditNote
-					onEdit={(note) => editNoteFun(note)}
-					title={editNote.title}
-					body={editNote.body}
-					id={editNote.id}
+					title={currentEditedNote.title}
+					body={currentEditedNote.body}
+					id={currentEditedNote.id}
+					onEdit={handleEditNote}
 				/>
-				<button onClick={() => toggleModal()}>Anuluj</button>
+				<button onClick={toggleModal}>Anuluj</button>
 			</Modal>
 
-			{notes.map((note) => (
+			{notes.map((item) => (
 				<Note
-					key={note.id}
-					note={note}
-					onDelete={deleteNote}
-					onEdit={(note) => editNoteHandler(note)}
+					key={item.id}
+					title={item.title}
+					body={item.body}
+					id={item.id}
+					onEdit={editNoteHandler}
+					onDelete={handleDeleteButton}
 				/>
 			))}
 		</div>
 	);
 }
-
-export default Notes;

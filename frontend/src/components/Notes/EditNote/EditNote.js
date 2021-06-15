@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-function EditNote(props) {
+const { useState } = React;
+
+export default function EditNote(props) {
 	const [title, setTitle] = useState(props.title);
 	const [desc, setDesc] = useState(props.body);
 
-	const editNote = () => {
+	const changeTitleHandler = (e) => {
+		setTitle(e.target.value);
+	};
+
+	const changeDescHandler = (e) => {
+		setDesc(e.target.value);
+	};
+
+	const editNote = (e) => {
+		e.preventDefault();
 		const note = {
 			title: title,
 			body: desc,
@@ -14,24 +25,14 @@ function EditNote(props) {
 	};
 
 	return (
-		<div className="note">
+		<form className="note">
 			<label>Tytuł:</label>
-			<input
-				type="text"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
-			/>
+			<input type="text" value={title} onChange={changeTitleHandler} />
 
 			<label>Opis:</label>
-			<input
-				type="text"
-				value={desc}
-				onChange={(e) => setDesc(e.target.value)}
-			/>
+			<input type="text" value={desc} onChange={changeDescHandler} />
 
-			<button onClick={() => editNote()}>Zapisz notatkę</button>
-		</div>
+			<button onClick={editNote}>Zapisz notatkę</button>
+		</form>
 	);
 }
-
-export default EditNote;

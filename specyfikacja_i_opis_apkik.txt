@@ -26,3 +26,4 @@ React
 
 react modal - modelowanie inputow przy edycji
 npm i react-modal
+npm install --save react-modal
