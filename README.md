@@ -25,9 +25,17 @@ npm i body-parser
 
 ### `npm i body-parser`
 
+naprawa przesyłu danych z backend do frontend
+
+### `npm i cors`
+
 Frontend:: =========================================================================================================
 React
 
 react modal - modelowanie inputow przy edycji
 
 ### `npm install --save react-modal`
+
+axios
+
+### `npm install axios`

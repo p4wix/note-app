@@ -1,11 +1,12 @@
 .note {
-	width: 60%;
+	max-width: 35%;
 	background-color: #fff;
 	font-size: 18px;
 	border-radius: 6px;
 	padding: 12px 20px;
 	text-align: left;
 	margin: 10px auto;
+	flex-basis: 55%;
 }
 
 .description {
@@ -22,8 +23,12 @@
 }
 
 .note button {
+	width: 150px;
+	height: 40px;
+	font-family: "Montserrat";
 	margin: 2px;
 	background-color: rgb(129, 70, 240);
+	background-color: rgb(147, 97, 168);
 	font-size: 16px;
 	color: #fff;
 	border: 0;
@@ -42,4 +47,42 @@
 
 .note button.delete:hover {
 	background-color: rgb(223, 57, 45);
+}
+
+.fill {
+	font-family: "Montserrat";
+	color: #fff;
+	font-size: 20px;
+	font-weight: 200;
+	letter-spacing: 1px;
+	padding: 13px 50px 13px;
+	outline: 0;
+	border: 1px solid black;
+	cursor: pointer;
+	position: relative;
+	background-color: rgba(0, 0, 0, 0);
+	margin-bottom: 15px;
+}
+
+.fill::after {
+	content: "";
+	background-color: rgb(147, 97, 168);
+	width: 100%;
+	z-index: -1;
+	position: absolute;
+	height: 100%;
+	top: 7px;
+	left: 7px;
+	transition: 0.2s;
+}
+
+.fill:hover::after {
+	top: 0px;
+	left: 0px;
+}
+
+.editNotes-wrap,
+.note-buttons-warp {
+	display: flex;
+	justify-content: flex-start;
 }

@@ -3,6 +3,7 @@ const app = express();
 const { port } = require("./config");
 const apiRouter = require("./routes/api");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 //db - wczytujemy po to aby plik sie uruchomił
 require("./db/mongoose");
@@ -11,8 +12,12 @@ require("./db/mongoose");
 //Content-type: aplitation/json - w taki sposób wysyłane sa dane z fontendu
 app.use(bodyParser.json());
 
+//fix cors
+app.use(cors());
+
 //Routes (/api zostanie automatycznie dodane do kazdej sciarzki w apiRoute)
 app.use("/api", apiRouter);
+
 
 //Server
 app.listen(port, () => {
