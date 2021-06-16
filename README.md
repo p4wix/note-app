@@ -1,4 +1,22 @@
-Backend::
+# App specification
+
+### Backend
+
+-  node.js
+-  express.js
+-  mongodb
+-  mongoose
+
+### Frontend
+
+-  react.js
+-  react-modal
+-  axios
+
+I used robot 3t and postman to control the backend api
+
+To start the app you need to start mongodb by setting good path with --dbpath
+Backend:
 index.js - odpala nam server który słucha domyślnie lokalnie na porcie 3000
 
 config.js - w przypadku gdyby był na hostingu to process.env.PORT czyli tam sobie wybiera domyślny port, jak i baze danych process.env.DATABASE lu domyślnie mongodb na localhoscie
